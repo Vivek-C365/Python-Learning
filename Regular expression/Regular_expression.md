@@ -11,3 +11,11 @@ Python provides a ***re*** module whole primary is to offer a search, where it t
 
 **import re** is used to import the re module
 
+# RegEx Functions
+
+- ***findall*** - Return a list containing all matches
+- ***search*** - Return a Match object if there is match anywhere in the string
+- ***split*** - Return a list where the string has been split at each match
+- ***sub*** - Replaces one or many matches with a string
+
+![image](https://github.com/Vivek-C365/Python-Learning/assets/95847089/fb457e27-d37d-4858-9914-3be7f0544822)
