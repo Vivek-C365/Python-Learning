@@ -1,5 +1,5 @@
 # Regular Expression
--
+
 
  - A Regular expression is a special sequence of character that uses a search pattern to find a strung or set of strings
 
@@ -87,3 +87,14 @@ Python provides a ***re*** module whole primary is to offer a search, where it t
 - ***sub*** - Replaces one or many matches with a string
 
 ![image](https://github.com/Vivek-C365/Python-Learning/assets/95847089/fb457e27-d37d-4858-9914-3be7f0544822)
+
+
+# Special Sequences in RegEx
+
+- Special sequences do not match for the actual character in the string instead it tells the specific location in the search string where the match must occur.
+
+- it makes it easier to write commonly used patterns
+
+![Alt text](image.png) 
+
+-
