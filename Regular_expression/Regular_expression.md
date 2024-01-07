@@ -97,4 +97,9 @@ Python provides a ***re*** module whole primary is to offer a search, where it t
 
 ![Alt text](image.png) 
 
--
+# RegEx Sets
+
+- A set is set of characters inside a pair of square brackets [] with a special meaning
+
+![Alt text](image-1.png)
+
