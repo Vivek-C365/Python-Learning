@@ -1,4 +1,4 @@
-flow_1 = {
+flow = {
     "intent": "product_info",
     "entities": [
         {"entity": "product", "prompt": "can you please enter what are you searching ?"},
