@@ -78,3 +78,14 @@ Code -
         a.cl = "BCA"
 
         a.info()
+
+Constructors
+-
+
+A constructor is a special method in a class used to create and initialize an object of a class. There are different types of constructor. 
+
+Constructor is invoked automatically when an object an object of a class is created
+
+    Syntax : __init__(self,param1,param2)
+
+A constructor is a unique function that gets called automatically when an object is created of a class. The main purpose of a constructor is to initialize or assign value to the data members of that class. It cannot return any value other than None.
