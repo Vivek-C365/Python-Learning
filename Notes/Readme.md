@@ -89,3 +89,33 @@ Constructor is invoked automatically when an object an object of a class is crea
     Syntax : __init__(self,param1,param2)
 
 A constructor is a unique function that gets called automatically when an object is created of a class. The main purpose of a constructor is to initialize or assign value to the data members of that class. It cannot return any value other than None.
+
+Types of Constructors in Python
+-
+
+- **Parameterized Constructor** - When the constructor accepts arguments along with ***self***, it is known as parameterized constructor.
+
+    These arguments can be used inside the class to assign the values to the data members.
+
+    Code - 
+
+        class Account:
+            def __init__(self,name):
+                self.name = name
+            
+            def info(self):
+                print(f"hey {self.name} what is your occupation")
+
+        a = Account("Vivek")
+        a.info()
+- **Default Constructor -** When the constructor doesn't accept any argument from the object and has only one argument ***self*** in the constructor it is known as a default constructor.
+
+    Code - 
+
+        class Acc:
+            def __init__(self):
+                print("How are you?")
+        obj = Acc()
+        
+
+

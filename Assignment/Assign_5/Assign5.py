@@ -1,141 +1,104 @@
 import random
 class Account:
-    def __init__(self, account_no, name, balance=0, min_balance=0, pin=None):
-        self.account_no = account_no
+    def __init__(self, account_number, name, account_type):
+        self.account = account_number
         self.name = name
-        self.balance = balance
-        self.min_balance = min_balance
-        self.pin = pin 
-        self.transaction_count = 0
-        self.logs = [] 
+        self._balance = 0 
+        self.transaction_count = 0 
+        self.account_type = account_type
+        self.logs = []
 
-    def deposit(self, amount):
-        self.balance += amount
-        self.add_log(f"Deposited: +{amount}")
+    def get_balance(self):
+        return self._balance
 
-    def withdraw(self, amount, pin):
-        if self.pin == pin and amount % 100 == 0 and amount <= 10000 and self.balance - amount >= self.min_balance:
-            self.balance -= amount
-            self.add_log(f"Withdrawn: -{amount}")
-            self.transaction_count += 1
-            if self.transaction_count > 5:
-                self.balance -= 10
-                self.add_log("Extra charge of 10Rs for exceeding transaction limit")
-            return True
+    def deposit(self, transaction):
+        self._balance += transaction
+        log_entry = dict(Deposited=f"+{transaction}")
+        self.logs.append(log_entry)
+
+    def withdraw(self, transaction):
+        self.transaction_count += 1
+        if self.transaction_count<=2:
+            self._balance -= transaction
+            log_entry = dict(Withdrawn=f"-{transaction}")
+            print(self.transaction_count)
+            self.logs.append(log_entry)
         else:
-            return False
-
-    def add_log(self, transaction):
-        self.logs.append(transaction)
-
-    def balance_enquiry(self):
-        return self.balance
+            self._balance -= transaction
+            self._balance -= 10
+            log_entry = dict(Withdrawn=f"-{transaction}" ,Extra_Charges = f"-10" )
+            self.logs.append(log_entry)
+            print("extra charges of 10Rs appliled for exeeding transaction limit")
+         
+    def account_info(self):
+        print(f"\nAccount Number: {self.account}\nAccount Type: {self.account_type}\nName: {self.name}\nBalance: {self._balance}\n")
 
     def get_statement(self):
-        return self.logs
+        print("\nTransactions:")
+        for log_entry in self.logs:
+            print(log_entry)
 
-    def get_account_info(self):
-        return f"Account Number: {self.account_no}\nName: {self.name}\nBalance: {self.balance}\nMinimum Balance: {self.min_balance}"
-
-    
-
-def mini_statement(account):
-    statements = account.get_statement()
-    if statements:
-        print("Mini Statement:")
-        for statement in statements[-5:]:
-            print(statement)
+def create_account(name, account_type):
+    account_number = random.randint(100000000, 999999999)
+    if account_type == 'Savings':
+        return Saving_account(account_number, name)
+    elif account_type == 'Current':
+        return Current_account(account_number, name)
     else:
-        print("No transactions yet.") 
-        
-class SavingsAccount(Account):
-    def __init__(self, account_no, name, initial_balance=0, pin=None):
-        super().__init__(account_no, name, initial_balance, min_balance=0, pin=pin)
+        print("Error! Wrong account type.")
 
+class Saving_account(Account):
+    def __init__(self, account_number, name):
+        super().__init__(account_number, name, account_type='Savings')  
 
-class CurrentAccount(Account):
-    def __init__(self, account_no, name, initial_balance=0, company_name="", pin=None):
-        super().__init__(account_no, name, initial_balance, min_balance=-1000, pin=pin)
-        self.company_name = company_name
-
-
-def create_account(account_type, name, initial_balance=0, company_name="", pin=None):
-    account_no = random.randint(10000000, 99999999)
-    if account_type.lower() == "savings":
-        return SavingsAccount(account_no, name, initial_balance, pin=pin)
-    elif account_type.lower() == "current":
-        return CurrentAccount(account_no, name, initial_balance, company_name, pin=pin)
-    else:
-        print("Invalid account type. Please enter either 'Savings' or 'Current'.")
-        return None
+class Current_account(Account):
+    def __init__(self, account_number, name):
+        super().__init__(account_number, name, account_type='Current')  
 
 def main():
-    for i in range(3):
-        try:
-            initial_balance = float(input("Enter Initial Balance: "))
-            if initial_balance > 0:
-                break
+    while True:
+        print("Type 1 for Savings account")
+        print("Type 2 for Current Account")
+        acc_choice = int(input("Enter your choice: "))
+        if acc_choice == 1:
+            name = input("Enter your name: ")
+            account_detail = create_account(name, 'Savings')
+        elif acc_choice == 2:
+            name = input("Enter your Company name: ")
+            account_detail = create_account(name, 'Current')
+        else:
+            print('Invalid choice. Please enter a number')
+            break
+        count = 0
+        while True and count < 3:
+            print("1. Deposit in Account")
+            print("2. Withdraw from Account")
+            print("3. Get Account Info")
+            print("4. Get Statement")
+            print("5. Balance Enquiry")
+            print("0. for Exit")
+            choice = int(input("Enter your Choice"))
+            if choice == 1:
+                amount = float(input("Enter the Amount to be deposited: "))
+                account_detail.deposit(amount)
+            elif choice == 2:
+                amount = float(input("Enter the Amount to be withdrawn: "))
+                account_detail.withdraw(amount)
+            elif choice == 3:
+                account_detail.account_info()
+            elif choice == 4:
+                account_detail.get_statement()
+            elif choice == 5:
+                print("Current Balance : ", account_detail.get_balance())
+            elif choice == 0:
+                exit()
             else:
-                print("Initial Balance should be greater than 0. Please try again.")
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-
-    while True:
-        account_type = input("Enter account type (Savings/Current): ")
-        name = input("Enter your name: ")
-        pin = input("Set PIN: ")  
-        if account_type.lower() == "current":
-            company_name = input("Enter company name: ")
-            account = create_account(account_type, name, initial_balance, company_name, pin=pin)
-        else:
-            account = create_account(account_type, name, initial_balance, pin=pin)
-        if account is not None:
-            break
-
-    while True:
-        entered_pin = input("Enter PIN: ")
-        if account.pin == entered_pin:
-            break
-        else:
-            print("Incorrect PIN. Please try again.")
-
-    while True:
-        print("\n1. Deposit")
-        print("2. Get Account Info")
-        print("3. Balance Enquiry")
-        print("4. Get Statement")
-        print("5. Withdraw")
-        print("6. Mini Statement")
-        print("7. Exit")
-        try:
-            choice = int(input("Enter choice: "))
-        except ValueError:
-            print("Invalid choice. Please enter a number.")
-            continue
-
-        if choice == 1:
-            amount = float(input("Enter deposit amount: "))
-            account.deposit(amount)
-            print("Deposit successful!")
-        elif choice == 2:
-            print(account.get_account_info())
-        elif choice == 3:
-            print(f"Current Balance: {account.balance_enquiry()}")
-        elif choice == 4:
-            print(account.get_statement())
-        elif choice == 5:
-            amount = float(input("Enter withdrawal amount: "))
-            pin = input("Enter PIN for withdrawal: ")
-            success = account.withdraw(amount, pin)
-            if not success:
-                print("Withdrawal failed. Please check amount, account balance, or PIN.")
-        elif choice == 6:
-            mini_statement(account)
-        elif choice == 7:
-            print("Exiting...")
-            break
-        else:
-            print("Invalid choice. Please try again.")
-
+                if count < 3:
+                    print("Invalid choice. Please try again.")
+                    count += 1
+                elif count == 3:
+                    print("You entered the wrong input 3 times")
+                    exit()
+                    
 if __name__ == "__main__":
     main()
