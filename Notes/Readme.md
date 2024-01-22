@@ -61,7 +61,7 @@ Code -
 
 Self parameter
 -
-
+ 
 The self parameter is a reference to the current instance of the class and is used to access variable that belongs to the class
 
 It must be provided as the extra parameter inside the method definition
@@ -108,6 +108,8 @@ Types of Constructors in Python
 
         a = Account("Vivek")
         a.info()
+
+
 - **Default Constructor -** When the constructor doesn't accept any argument from the object and has only one argument ***self*** in the constructor it is known as a default constructor.
 
     Code - 
