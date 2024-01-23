@@ -42,8 +42,26 @@ We can use formatted strings to dynamically insert values into our strings:
 
 ***message = f’Hi, my name is {name}’***
 
+# Functions
 
+1. Chr() - This takes in an integer i and converts it to a character c, so it returns a character string
 
+    Convert integer 65 to ASCII character ('A')
+
+        y = chr(65)
+        print(type(y),y)
+
+        output:
+        <class'str'> A
+
+2. ord() - This takes a single Unicode character (string of length 1) and returns an integer, so the format is :
+
+    Convert ASCII Unicode Character 'A' to 65
+
+        y = ord('A')
+        print(type(y),y)
+
+        <class'int'>65
 # Class and Objects
 A class represents a blueprint for creating objects (an object is an instance of a class).
 
