@@ -1,7 +1,7 @@
-str = 'a4'
+string = 'a4b3c2'
 
-dict = {}
-
-for i in str:
+for i in string:
     
-
+    print(i)
+    
+    
