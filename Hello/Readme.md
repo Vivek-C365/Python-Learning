@@ -92,3 +92,5 @@
     <!-- they return the html file which is present in template file with name of index.html -->
 
 3. Now we have to create a html file in template folder with **index.html**
+
+4. this is for testing the file 
