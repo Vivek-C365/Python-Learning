@@ -16,7 +16,7 @@ This command creates tables, modifies columns, adds indexes, and performs any ot
 
 - Command1
         
-        python manage.py makemigration
+        python manage.py makemigrations
 - Command 2 
 
         python manage.py migrate
@@ -105,16 +105,23 @@ This command creates tables, modifies columns, adds indexes, and performs any ot
 3. Now we have to create a html file in template folder with **index.html**
 
 4. When ever we click on any link. We want that Header and Footer remain same only content get changed. For that we create a html file
-    - eg - **we create a base.html** in this Header and footer code will saved for every page
+    - eg - **we create a nav.html** in this Header and footer code will saved for every page
 
-5. After create base html file we want to update content f body not all webpage.
-    - So we Add in base html file after **Navbar** and before **Footer**
+5. After create nav html file we want to update content f body not all webpage.
+    - So we Add in nav html file after **Navbar** and before **Footer**
         
             {% block body%}{% endblock body %}
 
 6. To use Navbar and footer in every webpage 
     - We use ***Extend*** function in html file where we want that navbar and footer
     
+            {% extends 'nav.html' %}
+
+            {% block body%}
+            This is body
+            {% endblock body %}
+
+
 # Work in ADMIN
 
 1. To login in admin panel of Django we have to create a **super user** 

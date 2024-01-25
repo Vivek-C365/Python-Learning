@@ -1,0 +1,43 @@
+{% extends 'nav.html' %}
+{% block title%} Login {% endblock title%}
+{% block style%} <link rel="stylesheet" href="../static/login.css"> {% endblock style%}
+
+{% block body%}
+
+<div class="container">
+    <div class="content">
+
+        <div class="login_img">
+            
+            <img src="../static/login_img.png" alt="">
+        </div>
+        <div class="login_form">
+            <div class="login_box">
+                <div class="login_heading">
+                    <h1>Login to your Account</h1>
+                </div>
+                <div class="login_details">
+                    <form action="">
+                        <div class="email_field">
+
+                            <label for="email">Email Address:</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="password_field">
+                            <label for="passwd">Password:</label>
+                            <input type="password" name="passwd" id="passwd">
+                        </div>
+                        <div class="remember_me">
+                            <input type="checkbox" name="remember_me" id="remember_me">
+                        </div>
+                        <div class="submit_btn">
+                            <button type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
