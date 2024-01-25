@@ -136,3 +136,79 @@ This command creates tables, modifies columns, adds indexes, and performs any ot
             min.site.site_header = "UMSRA Admin"
             admin.site.site_title = "UMSRA Admin Portal"
             admin.site.index_title = "Welcome to UMSRA Researcher Portal"
+
+
+# CSRF
+
+- It stands for Cross Site Request Forgery
+- Command -
+  
+        {% csrf_token %}
+- The transfer request is extended with a third argument: http://www.mybank.com/transfer?to=123456;-amount=10000;token=31415926535897932384626433832795028841971.
+- That token is a huge, impossible-to-guess random number that mybank.com will include on their own web page when they serve it to you. It is different each time they serve any page to anybody.
+- The attacker is not able to guess the token, is not able to convince your web browser to surrender it (if the browser works correctly...), and so the attacker will not be able to create a valid request, because requests with the wrong token (or no token) will be refused by ***www.mybank.com.***
+
+
+# How Database is created in Django
+
+## How Model is created 
+
+- Work in ***models.py*** file
+
+- A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table.
+  
+    Code - 
+
+            from django.db import models
+
+            # Create your models here.
+            class Contact(models.Model):
+                name = models.CharField(max_length=100)
+                email = models.CharField(max_length=100)
+                message = models.CharField(max_length=100)
+                
+                def __str__(self):
+                        return self.name 
+
+### After create model in models file, Then we have to **makemigrations**. They show ***no changes detected***
+1. To detect changes we have to register model in **admin.py** file in App folder
+   
+            from django.contrib import admin
+            from home.models import Contact
+
+            admin.site.register(Contact)
+2. Now go to **app.py** in App folder and copy the class name 
+3. Paste it in settings.py in Project folder at ***INSTALLED_APPS***  
+    
+            ''(App name).apps.(Classnamecome from app.py)
+4.  To detect changes in Databae we have to - makemigrations
+     ![Alt text](image.png)
+5. After makemigrstions we have apply changes in Database
+    - So we migrate the changes by giving command 
+  
+    Command -
+
+            python manage.py migrate
+
+### After creating model for Form submission 
+
+1. Now we Write logic to Enter data from webpage to Database. For do that we modify **view.py** in App folder
+   
+   - First we have to **import model** from the model files
+  
+            from home.models import Contact
+
+   - After import we have to handle Post request
+
+            def contact(request):
+                if request.method=="POST":
+                    name=request.POST.get('name')
+                    email=request.POST.get('email')
+                    message=request.POST.get('message')
+                    contact = Contact(name = name, email=email, message = message)
+                    contact.save()
+                return render(request,'contact.html' )
+
+## How we access the database in terminal
+
+![Alt text](image-1.png)
