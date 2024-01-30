@@ -1,0 +1,53 @@
+{
+  "flow_1": {
+    "intent": "product_info",
+    "entities": [],
+    "api_data": {
+      "url": "https://rasatest.free.beeceptor.com/"
+    }
+  },
+  "flow_2": {
+    "intent": "ask_price",
+    "entities": [
+      {
+        "entity": "product",
+        "prompt": "can you please enter what are you searching ?"
+      },
+      {
+        "entity": "location",
+        "prompt": "Please enter your location ?"
+      },
+      {
+        "entity": "this is entity",
+        "prompt": "checking"
+      },
+      {
+        "entity": "name",
+        "prompt": "tell me your name"
+      }
+    ],
+    "api_data": {
+      "url": "https://rasatest.free.beeceptor.com/"
+    }
+  },
+  "flow_3": {
+    "intent": "ask_price",
+    "entities": [
+      {
+        "entity": "order_id",
+        "prompt": "Please enter your order id ?"
+      },
+      {
+        "entity": "number",
+        "prompt": "phone number"
+      },
+      {
+        "entity": "my_name",
+        "prompt": "this is my name"
+      }
+    ],
+    "api_data": {
+      "url": "https://rasatest.free.beeceptor.org"
+    }
+  }
+}
