@@ -1,0 +1,45 @@
+{% extends 'dasboard_nav.html' %}
+
+{% block style%}
+<!-- <link href="../static/sb-admin-2.css" rel="stylesheet"> -->
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/job_card.css">
+
+{% endblock style%}
+
+{% block title%} Indeed Listing {% endblock title %}
+
+{% block body %}
+
+<h1>Register Admin</h1>
+    <form action="/indeed_job/" method="post">
+        {% csrf_token %}
+        <label for="custom_id">custom_id:</label><br>
+        <input type="text" id="custom_id" name="custom_id" ><br>
+
+        <label for="job_title">job_title:</label><br>
+        <input type="text" id="job_title" name="job_title" ><br>
+
+        <label for="company">company:</label><br>
+        <input type="text" id="company" name="company" ><br>
+
+        <label for="location">location:</label><br>
+        <input type="text" id="location" name="location" ><br>
+
+        <label for="salary_range">salary_range:</label><br>
+        <input type="text" id="salary_range" name="salary_range" ><br>
+
+        <label for="tags">tags:</label><br>
+        <input type="text" id="tags" name="tags" ><br>
+
+        <label for="date_of_post">date_of_post:</label><br>
+        <input type="text" id="date_of_post" name="date_of_post" ><br>
+
+        <label for="job_description">job_description:</label><br>
+        <input type="text" id="job_description" name="job_description" ><br>
+
+        <button type="submit">Register</button>
+       
+    </form>
+{% endblock body %}
