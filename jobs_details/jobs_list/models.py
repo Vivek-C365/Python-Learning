@@ -7,14 +7,14 @@ class adm(models.Model):
     password= models.CharField(max_length=100)
 
 class indeed_job_list(models.Model):
-    custom_id = models.CharField(max_length=20)
-    job_title = models.CharField(max_length=123)
-    company = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    salary_range = models.CharField(max_length =100)
-    tags = models.CharField(max_length=100)
-    date_of_post = models.CharField(max_length = 100)
-    job_description = models.CharField(max_length = 100)
+    id = models.AutoField(primary_key=True)
+    job_title = models.CharField(max_length=123,null=True, blank=True)
+    company = models.CharField(max_length=100,null=True, blank=True)
+    location = models.CharField(max_length=100,null=True, blank=True)
+    salary_range = models.CharField(max_length =100,null=True, blank=True)
+    tags = models.CharField(max_length=100,null=True, blank=True)
+    date_of_post = models.CharField(max_length = 100,null=True, blank=True)
+    job_description = models.CharField(max_length = 100,null=True, blank=True)
 
 
 
