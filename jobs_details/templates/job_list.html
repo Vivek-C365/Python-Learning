@@ -187,10 +187,10 @@
         </div>
         <div class="alljob_content">
             <!-- Job  Listing Cards -->
-            <div class="job_fields" onclick="toggleDescription(0)">
+            <div class="job_fields" >
                 {% for job in jobs %}
 
-                <div class="job-card">
+                <div class="job-card"onclick="toggleDescription(0)">
                     <div class="job_heading">
 
                         <h2 class="job-title">{{ job.job_title }}</h2>
@@ -205,17 +205,13 @@
 
                         </div>
                     </div>
-                    <!-- <form method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="delete" value="{{ job.id }}">
-                        <button type="submit"
-                            class="btn btn-danger">Delete</button>
-                    </form> -->
+                    <!-- Job Delete Button  -->
                     <form id="deleteForm" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="delete" value="{{ job.id }}">
                         <button type="button" onclick="confirmDelete()" class="btn btn-danger">Delete</button>
                     </form>
+                    <!-- Job Update Button -->
                     <button type="button" class="btn btn-secondary"
                         data-bs-toggle="modal"
                         data-bs-target="#staticupdate">
