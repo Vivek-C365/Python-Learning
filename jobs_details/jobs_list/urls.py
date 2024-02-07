@@ -11,7 +11,7 @@ urlpatterns = [
     path("job_list/", job_list, name = 'Job_List'),
     path("indeed_job/", indeed_job, name = 'Indeed_Job'),
     path("Logout/", LogoutPage, name = 'Logout'),
-    path("test/", test, name = 'test'),
+    path("test/", job_list, name = 'test'),
     path("source/",Source_view, name ='source'),
     
 ]

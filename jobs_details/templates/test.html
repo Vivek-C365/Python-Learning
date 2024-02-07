@@ -1,94 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Cards with Descriptions</title>
+{% extends 'dasboard_nav.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/job_card.css">
 <style>
-    /* Add CSS to position the job description container */
+    /* Add CSS for styling */
     .job_container {
         display: flex;
+        flex-wrap: wrap;
     }
-
-    .job_card {
-        /* Add your styling for job card here */
+    .job-card {
         cursor: pointer;
-        margin-right: 20px; /* Adjust spacing between job cards */
+        margin-right: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: relative; /* Add position relative */
     }
-
-    .job_description {
-        /* Add your styling for job description here */
+    .job_desc {
         display: none;
-        margin-left: 20px; /* Adjust spacing between job card and description */
+        position: absolute; /* Add position absolute */
+        top: 0;
+        left: calc(100% + 20px); /* Position to the right of the job card */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        width: 300px; /* Adjust the width as needed */
+        z-index: 1; /* Ensure the description is above other content */
     }
-
     .active {
-        /* Add your styling for active job description here */
         display: block;
     }
 </style>
-</head>
-<body>
+{% endblock style %}
 
-<div class="job_container">
-    <!-- Job Card 1 -->
-    <div class="job_card" onclick="toggleDescription()">
-        <!-- Content of your job card -->
-        <h3>System Administrator</h3>
-        <p>CTG ITS</p>
-    </div>
-    <!-- Job Description 1 -->
-    <div class="job_description" id="description0">
-        <!-- Content of your job description -->
-        <h4>Job Description</h4>
-        <div class="job_details_breif">
-            <div class="job_desc_fileds"><span>Company Name</span><span>CTG ITS</span></div>
-            <div class="job_desc_fileds"><span>Company Email</span><span></span></div>
-            <div class="job_desc_fileds"><span>Company contact No</span><span></span></div>
-            <div class="job_desc_fileds"><span>Website URL</span><span><a href="http://www.ctg.com">www.ctg.com</a></span></div>
-            <div class="job_desc_fileds"><span>Company Type</span><span></span></div>
-            <div class="job_desc_fileds"><span>Number of Employees</span><span>2,500 to 4,999 employees</span></div>
-            <div class="job_desc_fileds"><span>Date of Post</span><span>Vandaag</span></div>
+{% block title %} Job Listing {% endblock title %}
+
+{% block body %}
+<body id="page-top">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="alljob_content">
+            <div class="job_container">
+                {% for job in jobs %}
+                <!-- Job Card -->
+                <div class="job-card" onclick="toggleDescription('{{ job.id }}')">
+                    <div class="job_heading">
+                        <h2 class="job-title">{{ job.job_title }}</h2>
+                        <p class="company-name">{{ job.location }}</p>
+                    </div>
+                    <div class="job-details">
+                        <p>{{ job.company }}</p>
+                        <div class="job_content">
+                            <p>{{ job.salary_range }}</p>
+                            <p>{{ job.tags }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Job Description -->
+                <div class="job_desc" id="description{{ job.id }}">
+                    <div class="job_dec_title">
+                        <h4>Job Description</h4>
+                    </div>
+                    <div class="job_dec_details">
+                        <h2 class="brief_title">{{ job.job_title }}</h2>
+                        <div class="job_details_breif">
+                            <div class="job_desc_fileds"><span>Company Name</span><span>{{ job.company }}</span></div>
+                            <div class="job_desc_fileds"><span>Company Email</span><span></span></div>
+                            <div class="job_desc_fileds"><span>Company contact No</span><span></span></div>
+                            <div class="job_desc_fileds"><span>Website URL</span><span><a href="http://www.ctg.com">www.ctg.com</a></span></div>
+                            <div class="job_desc_fileds"><span>Company Type</span><span></span></div>
+                            <div class="job_desc_fileds"><span>Number of Employees</span><span>2,500 to 4,999 employees</span></div>
+                            <div class="job_desc_fileds"><span>Date of Post</span><span>Vandaag</span></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-    
-    <!-- Job Card 2 -->
-    <div class="job_card" onclick="toggleDescription(1)">
-        <!-- Content of your job card -->
-        <h3>Software Developer</h3>
-        <p>XYZ Corporation</p>
-    </div>
-    <!-- Job Description 2 -->
-    <div class="job_description" id="description1">
-        <!-- Content of your job description -->
-        <h4>Job Description</h4>
-        <div class="job_details_breif">
-            <div class="job_desc_fileds"><span>Company Name</span><span>XYZ Corporation</span></div>
-            <div class="job_desc_fileds"><span>Company Email</span><span></span></div>
-            <div class="job_desc_fileds"><span>Company contact No</span><span></span></div>
-            <div class="job_desc_fileds"><span>Website URL</span><span><a href="http://www.xyzcorp.com">www.xyzcorp.com</a></span></div>
-            <div class="job_desc_fileds"><span>Company Type</span><span></span></div>
-            <div class="job_desc_fileds"><span>Number of Employees</span><span>1,000 to 2,499 employees</span></div>
-            <div class="job_desc_fileds"><span>Date of Post</span><span>Yesterday</span></div>
-        </div>
-    </div>
 
-    <!-- Add more job cards as needed -->
-</div>
-
-<script>
-    function toggleDescription(index) {
-        var descriptions = document.querySelectorAll('.job_description');
-        
-        descriptions.forEach(function(description, i) {
-            if (i === index) {
-                description.classList.toggle('active');
-            } else {
-                description.classList.remove('active');
-            }
-        });
-    }
-</script>
-
+    <script>
+        function toggleDescription(jobId) {
+            var description = document.getElementById('description' + jobId);
+            description.classList.toggle('active');
+        }
+    </script>
 </body>
-</html>
+{% endblock body %}
