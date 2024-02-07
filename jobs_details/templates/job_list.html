@@ -190,80 +190,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Update Modal -->
-            <div class="modal fade" id="staticupdate"
-                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5"
-                                id="staticBackdropLabel"></h1>
-                            <button type="button" class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="function_heading" style="
-                            margin-top: 20px;
-                        ">
-                                <h4 style="
-                                margin-bottom: 15px;
-                            ">
-                                    Update
-                                </h4>
-                                <div class="jobs_update">
-                                    <form method="post"
-                                        enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        <label
-                                            for="job_title">job_title:</label><br>
-                                        <input type="text" id="job_title"
-                                            name="job_title"><br>
-
-                                        <label
-                                            for="company">company:</label><br>
-                                        <input type="text" id="company"
-                                            name="company"><br>
-
-                                        <label
-                                            for="location">location:</label><br>
-                                        <input type="text" id="location"
-                                            name="location"><br>
-
-                                        <label
-                                            for="salary_range">salary_range:</label><br>
-                                        <input type="text" id="salary_range"
-                                            name="salary_range"><br>
-
-                                        <label for="tags">tags:</label><br>
-                                        <input type="text" id="tags"
-                                            name="tags"><br>
-
-                                        <label
-                                            for="date_of_post">date_of_post:</label><br>
-                                        <input type="text" id="date_of_post"
-                                            name="date_of_post"><br>
-
-                                        <label
-                                            for="job_description">job_description:</label><br>
-                                        <input type="text" id="job_description"
-                                            name="job_description"><br>
-                                        <button type="submit"
-                                            class="btn btn-primary">Update</button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
         <div class="alljob_content">
@@ -297,6 +223,64 @@
                         data-bs-target="#staticupdate">
                         Update
                     </button>
+                    <!-- Update Modal -->
+                    <div class="modal fade" id="staticupdate"
+                        data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5"
+                                        id="staticBackdropLabel"></h1>
+                                    <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="function_heading" style="
+                        margin-top: 20px;
+                    ">
+                                        <h4 style="
+                            margin-bottom: 15px;
+                        ">
+                                            Update
+                                        </h4>
+                                        <div class="jobs_update">
+                                            <form method="post"
+                                                enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <input type="hidden"
+                                                    name="update" id="job_id"
+                                                    value="{{ job.id }}">
+                                                    <label for="job_title">Job Title:</label>
+                                                    <input type="text" id="job_title" name="job_title" value="{{ job.job_title }}"><br>
+                                                    <label for="company">Company:</label>
+                                                    <input type="text" id="company" name="company" value="{{ job.company }}"><br>
+                                                    <label for="location">Location:</label>
+                                                    <input type="text" id="location" name="location" value="{{ job.location }}"><br>
+                                                    <label for="salary_range">Salary Range:</label>
+                                                    <input type="text" id="salary_range" name="salary_range" value="{{ job.salary_range }}"><br>
+                                                    <label for="tags">Tags:</label>
+                                                    <input type="text" id="tags" name="tags" value="{{ job.tags }}"><br>
+                                                <button type="submit"
+                                                    class="btn btn-primary">Update</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 {% endfor %}
             </div>
