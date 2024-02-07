@@ -53,16 +53,11 @@
                 <div class="dropdown" style="
                 margin-left: 10px;
             ">
-                    <button class="btn btn-secondary dropdown-toggle"
-                        type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button class="btn btn-secondary"
+                        type="button" data-bs-toggle="modal"
+                        data-bs-target="#staticupload">
                         Upload
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><button class="dropdown-item" data-bs-toggle="modal"
-                                data-bs-target="#staticupload"
-                                type="button">Indeed</button></li>
-                    </ul>
                 </div>
             </div>
 
@@ -174,10 +169,8 @@
                                     <form method="post"
                                         enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <input type="file" name="excel_file"
-                                            id="remote_job">
-                                        <button type="submit"
-                                            class="btn btn-primary">Upload</button>
+                                        <input type="file" name="excel_file"id="remote_job">
+                                        <button type="submit"class="btn btn-primary">Upload</button>
                                     </form>
                                 </div>
 
@@ -193,8 +186,8 @@
 
         </div>
         <div class="alljob_content">
-
-            <div class="job_fields">
+            <!-- Job  Listing Cards -->
+            <div class="job_fields" onclick="toggleDescription(0)">
                 {% for job in jobs %}
 
                 <div class="job-card">
@@ -212,11 +205,16 @@
 
                         </div>
                     </div>
-                    <form method="post">
+                    <!-- <form method="post">
                         {% csrf_token %}
                         <input type="hidden" name="delete" value="{{ job.id }}">
                         <button type="submit"
                             class="btn btn-danger">Delete</button>
+                    </form> -->
+                    <form id="deleteForm" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete" value="{{ job.id }}">
+                        <button type="button" onclick="confirmDelete()" class="btn btn-danger">Delete</button>
                     </form>
                     <button type="button" class="btn btn-secondary"
                         data-bs-toggle="modal"
@@ -240,21 +238,15 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <div class="function_heading" style="
-                        margin-top: 20px;
-                    ">
-                                        <h4 style="
-                            margin-bottom: 15px;
-                        ">
+                                    <div class="function_heading" style="margin-top: 20px;">
+                                        <h4 style="margin-bottom: 15px;">
                                             Update
                                         </h4>
                                         <div class="jobs_update">
                                             <form method="post"
                                                 enctype="multipart/form-data">
                                                 {% csrf_token %}
-                                                <input type="hidden"
-                                                    name="update" id="job_id"
-                                                    value="{{ job.id }}">
+                                                <input type="hidden" name="update" id="job_id"value="{{ job.id }}">
                                                     <label for="job_title">Job Title:</label>
                                                     <input type="text" id="job_title" name="job_title" value="{{ job.job_title }}"><br>
                                                     <label for="company">Company:</label>
@@ -284,8 +276,8 @@
                 </div>
                 {% endfor %}
             </div>
-
-            <div class="job_desc">
+            <!-- Job Description -->
+            <div class="job_desc job_description" id="description0">
                 <div class="job_dec_title">
                     <h4>
                         Job Description
@@ -317,6 +309,29 @@
             </div>
         </div>
     </div>
+    <!-- Add your JavaScript imports and other footer elements here -->
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this entry?")) {
+            document.getElementById("deleteForm").submit();
+        } else {
+            // If user clicks cancel or no, do nothing
+        }
+    }
+</script>
+<script>
+    function toggleDescription(index) {
+        var descriptions = document.querySelectorAll('.job_description');
+        
+        descriptions.forEach(function(description, i) {
+            if (i === index) {
+                description.classList.toggle('active');
+            } else {
+                description.classList.remove('active');
+            }
+        });
+    }
+</script>
 
 </body>
 

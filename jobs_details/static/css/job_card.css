@@ -141,4 +141,20 @@ input[type="file"] {
     background-color: #e5e7eb;
   }
   
+  .job_card {
+    /* Add your styling for job card here */
+    cursor: pointer;
+    margin-right: 20px; /* Adjust spacing between job cards */
+}
+
+.job_description {
+    /* Add your styling for job description here */
+    display: none;
+    margin-left: 20px; /* Adjust spacing between job card and description */
+}
+
+.active {
+    /* Add your styling for active job description here */
+    display: block;
+}
   /* ------------------------ */

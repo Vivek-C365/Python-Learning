@@ -58,7 +58,7 @@ def job_list(request):
             job_to_delete = indeed_job_list.objects.get(pk=job_id_to_delete)
             job_to_delete.delete()
             # return redirect('job_list')# Redirect to the same page after deletion
-        else:
+        elif 'update' in request.POST:
             # Update operation
             job_id_to_update = request.POST.get('update')
             job_to_update = indeed_job_list.objects.get(pk=job_id_to_update)
@@ -69,28 +69,28 @@ def job_list(request):
             job_to_update.salary_range = request.POST.get('salary_range')
             job_to_update.tags = request.POST.get('tags')
             job_to_update.save()
-        # else:
-        #     excel_file = request.FILES['excel_file']
-        #     file_name = excel_file.name
-        #     file = file_name.split('_')[0]
-        #     if file_name.endswith('.xlsx'):
-        #         if Source.objects.filter(name=file).exists():
-        #             print('File already exists')
-        #         else:
-        #             Source.objects.create(name=file)
-        #             print('File name Saved')
-        #         wb = load_workbook(excel_file)
-        #         wb = wb.active
-        #         for row in wb.iter_rows(values_only=True):
-        #             job_title, company_name, location, salary_range, tags = row
-        #             indeed_job_list.objects.create(
-        #                 job_title=job_title, 
-        #                 company=company_name,
-        #                 location=location,
-        #                 salary_range=salary_range,
-        #                 tags=tags
-        #             )
-        #         print(file)
+        else:
+            excel_file = request.FILES['excel_file']
+            file_name = excel_file.name
+            file = file_name.split('_')[0]
+            if file_name.endswith('.xlsx'):
+                if Source.objects.filter(name=file).exists():
+                    print('File already exists')
+                else:
+                    Source.objects.create(name=file)
+                    print('File name Saved')
+                wb = load_workbook(excel_file)
+                wb = wb.active
+                for row in wb.iter_rows(values_only=True):
+                    job_title, company_name, location, salary_range, tags = row
+                    indeed_job_list.objects.create(
+                        job_title=job_title, 
+                        company=company_name,
+                        location=location,
+                        salary_range=salary_range,
+                        tags=tags
+                    )
+                print(file)
         
         # return redirect('job_list')  # Redirect to the same page after adding jobs
     
